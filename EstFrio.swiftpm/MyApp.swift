@@ -4,7 +4,9 @@ import SwiftUI
 struct MyApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+//            OnBoardScreen(showStartScreen: .constant(false))
+            StartScreen()
+        
         }
     }
 }

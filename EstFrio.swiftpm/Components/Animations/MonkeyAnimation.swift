@@ -8,29 +8,29 @@
 import SwiftUI
 
 struct MonkeyAnimation: View {
-    @State private var angle: Double = -30 // Ângulo inicial do pêndulo
+    @State private var angle: Double = 0
     
     var body: some View {
         VStack {
-            Image(systemName: "monkey") // Substitua pela imagem desejada
+            Image("sagui")
                 .resizable()
                 .scaledToFit()
-                .frame(width: 100, height: 100)
-                .rotationEffect(.degrees(angle), anchor: .top) // Define o ponto de rotação no topo
+                .frame(width: UIScreen.main.bounds.width * 0.19, height: UIScreen.main.bounds.height * 0.28)
+                .rotationEffect(.degrees(angle), anchor: .top)
                 .animation(
                     Animation.easeInOut(duration: 1.5)
                         .repeatForever(autoreverses: true),
                     value: angle
                 )
         }
-        
+        .offset(x: -380, y: -165)
         .onAppear {
             startPendulumAnimation()
         }
     }
 
     func startPendulumAnimation() {
-        angle = 30 // Alterna para o lado oposto
+        angle = 15 // Alterna para o lado oposto
     }
 }
 

@@ -14,7 +14,7 @@ struct PollenView: View {
     @State private var currentIndex = 0
     @State private var wind = ["wind1", "wind2", "wind3", "wind4"]
     @State private var audioRecorder: AVAudioRecorder?
-
+    @State private var isShowingFire = false
     @State private var polens: [PollenParticle] = []
 
     let screenWidth = UIScreen.main.bounds.width
@@ -27,40 +27,50 @@ struct PollenView: View {
                 .scaledToFill()
                 .frame(width: screenWidth, height: screenHeight)
                 .ignoresSafeArea()
-
-            // Animação do vento (quando o jogador sopra)
-            if isBlowing {
-                Image(wind[currentIndex])
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: screenWidth, height: screenHeight)
-                    .opacity(opacity)
-            }
-
-            // Partículas de pólen voando continuamente
-            ForEach(polens) { pollen in
-                Circle()
-                    .fill(Color.yellow.opacity(pollen.opacity))
-                    .frame(width: 8, height: 8)
-                    .position(pollen.position)
-                    .onAppear {
-                        animatePollen(pollen.id)
+            if !isShowingFire{
+                ZStack {
+                    
+                    ZStack {
+                        
+                        // Animação do vento (quando o jogador sopra)
+                        if isBlowing {
+                            Image(wind[currentIndex])
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: screenWidth, height: screenHeight)
+                                .opacity(opacity)
+                        }
+                        
+                        // Partículas de pólen voando continuamente
+                        ForEach(polens) { pollen in
+                            Circle()
+                                .fill(Color.yellow.opacity(pollen.opacity))
+                                .frame(width: 8, height: 8)
+                                .position(pollen.position)
+                                .onAppear {
+                                    animatePollen(pollen.id)
+                                }
+                        }
                     }
+                    .onAppear {
+                        startAudioCapture()
+                    }
+                    .onDisappear {
+                        stopAudioCapture()
+                    }
+                    .onChange(of: isBlowing) { newValue in
+                        withAnimation(.easeInOut(duration: 0.3)) {
+                            opacity = newValue ? 1.0 : 0.0
+                        }
+                        
+                        if newValue {
+                            generatePollen()
+                        }
+                    }
+                }
             }
-        }
-        .onAppear {
-            startAudioCapture()
-        }
-        .onDisappear {
-            stopAudioCapture()
-        }
-        .onChange(of: isBlowing) { newValue in
-            withAnimation(.easeInOut(duration: 0.3)) {
-                opacity = newValue ? 1.0 : 0.0
-            }
-            
-            if newValue {
-                generatePollen()
+            else {
+                HunterView()
             }
         }
     }

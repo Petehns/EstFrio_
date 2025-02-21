@@ -10,6 +10,7 @@ import SwiftUI
 
 struct StartScreen: View {
     @State var showStartScreen: Bool = true
+    @ObservedObject var appState = ChallengeViewModel.shared
     var body: some View {
         
         if showStartScreen == true {
@@ -17,7 +18,9 @@ struct StartScreen: View {
             ZStack {
                 Image("background")
                     .resizable()
-                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                    .scaledToFill()
+                    .frame(width: UIScreen.main.bounds.width * 1.01, height: UIScreen.main.bounds.height * 1.01)
+                    .ignoresSafeArea(.all)
                 VStack {
                  
                    Image("estFrio")
@@ -27,13 +30,16 @@ struct StartScreen: View {
                         .padding(.top, UIScreen.main.bounds.height * 0.055)
                     
                     Spacer()
-                    Button(action: {
-                        showStartScreen.toggle()
-                    }, label: {
-                        Text("Iniciar")
-                            .font(.system(size: 40, weight: .bold))
-                            .foregroundStyle(.white)
-                    })
+//                    Button(action: {
+//                        showStartScreen.toggle()
+//                    }, label: {
+//                        Text("Iniciar")
+//                            .font(.system(size: 40, weight: .bold))
+//                            .foregroundStyle(.white)
+//                    })
+                    Button("Iniciar") {
+                                   appState.currentScreen = .onboard
+                               }
                     
                 }
                 .padding(UIScreen.main.bounds.height*0.2)

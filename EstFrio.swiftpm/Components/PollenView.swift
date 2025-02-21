@@ -22,11 +22,7 @@ struct PollenView: View {
 
     var body: some View {
         ZStack {
-            Image("background2025")
-                .resizable()
-                .scaledToFill()
-                .frame(width: screenWidth, height: screenHeight)
-                .ignoresSafeArea()
+        
             if !isShowingFire{
                 ZStack {
                     

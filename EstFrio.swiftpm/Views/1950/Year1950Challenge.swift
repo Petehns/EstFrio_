@@ -6,15 +6,17 @@
 //
 
 import SwiftUI
-struct HoseChallenge: View {
+struct Year1950Challenge: View {
+    @EnvironmentObject var challengeViewModel: ChallengeViewModel
     var body: some View {
         ZStack {
-            Image("background2025")
+            Image("background1950")
                 .resizable()
                 .scaledToFill()
-                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                .frame(width: UIScreen.main.bounds.width * 1.01, height: UIScreen.main.bounds.height * 1.01)
                 .ignoresSafeArea()
             
+            HunterView()
             FireHoseView(motionManager: MotionManager())
         }
     }

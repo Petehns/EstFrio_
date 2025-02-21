@@ -18,15 +18,11 @@ struct HunterView: View {
     @State private var timer: Timer?
     let enemyImages = ["leaf1", "leaf2"] // Substitua pelos nomes das imagens no Assets
     let gameTime: TimeInterval = 2.0
-    
+    @EnvironmentObject var challengeViewModel: ChallengeViewModel
     var body: some View {
         GeometryReader { geometry in
             ZStack {
-                Image("background2025")
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-                    .ignoresSafeArea()
+              
                 
                 ForEach(enemies) { enemy in
                     Image(enemy.imageName)

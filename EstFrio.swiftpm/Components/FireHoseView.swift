@@ -4,7 +4,7 @@ import CoreMotion
 
 struct FireHoseView: UIViewRepresentable {
     @ObservedObject var motionManager: MotionManager
-    
+    @EnvironmentObject var challengeViewModel: ChallengeViewModel
     func makeUIView(context: UIViewRepresentableContext<FireHoseView>) -> SCNView {
         let sceneView = SCNView()
         sceneView.scene = SCNScene(named: "hose2.scn")

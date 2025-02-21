@@ -20,7 +20,7 @@ struct OunceAnimation: View {
                 .frame(width: UIScreen.main.bounds.width * 0.23, height: UIScreen.main.bounds.height * 0.2)
                 .opacity(opacity)
                 .animation(.linear(duration: 1.0), value: opacity)
-                .offset(x: 240, y: 100)
+                .offset(x: 200, y: 190)
         }
         .onAppear {
             Timer.scheduledTimer(withTimeInterval: 3.0, repeats: true) { _ in

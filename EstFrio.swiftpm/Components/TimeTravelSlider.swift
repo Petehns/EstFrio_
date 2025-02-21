@@ -11,7 +11,8 @@ struct TimeTravelSlider: View {
     @State private var dragAngle: Double = 0
     @State private var previousDragAngle: Double = 0
     @State private var isMovingForward: Bool = true
-    @State private var selectedYear: Int = 1950
+    @ObservedObject var appState = ChallengeViewModel.shared
+        @State private var selectedYear: Int = 2100
     @State private var isGoingToDestination: Bool = false
     @State private var currentYear: Int = 1950
     let years = [1950, 1975, 2025, 2075, 2100]
@@ -21,7 +22,7 @@ struct TimeTravelSlider: View {
         1950: "background1950",
         1975: "backgroundInt2",
         2025: "background2025",
-        2075: "backgroundInt1",
+        2075: "background2075",
         2100: "background2100"
     ]
     
@@ -32,8 +33,8 @@ struct TimeTravelSlider: View {
               Image(images[closestYear(to: dragAngle)] ?? "fallback_image")
                   .resizable()
                   .scaledToFill()
-                  .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-                  .ignoresSafeArea()
+                  .frame(width: UIScreen.main.bounds.width * 1.01, height: UIScreen.main.bounds.height * 1.01)
+                  .ignoresSafeArea(.all)
               
               VStack {
                   Spacer()
@@ -64,8 +65,9 @@ struct TimeTravelSlider: View {
                                       .position(x: geometry.size.width / 2 + x, y: geometry.size.height / 2 + y)
                               }
                               if !hiddenYears.contains(year) {
-                                             Button(action: { isGoingToDestination = true }) {
-                                                 Text("Viajar para o ano \(year)")
+                                  Button(action: { /*isGoingToDestination = true */
+                                      appState.travelToYear(Int(selectedYear))}) {
+                                                 Text("Viajar no tempo")
                                                      .padding()
                                                      .background(Color.blue)
                                                      .foregroundColor(.white)

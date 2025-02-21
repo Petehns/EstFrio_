@@ -11,6 +11,7 @@ import SwiftUI
 struct OnBoardScreen: View {
     @Binding var showStartScreen: Bool
     @State var timeTravelisOn: Bool = false
+    @ObservedObject var appState = ChallengeViewModel.shared
     var body: some View {
         if timeTravelisOn == false {
             ZStack {
@@ -24,7 +25,8 @@ struct OnBoardScreen: View {
                                 .padding(.trailing, UIScreen.main.bounds.width * 0.07)
                                 .padding(.top, UIScreen.main.bounds.height * 0.7)
                             Button(action:{
-                                timeTravelisOn.toggle()
+//                                timeTravelisOn.toggle()
+                                appState.currentScreen = .timeTravel
                             }, label: {
                                 Image("timeTravelButton")
                             })

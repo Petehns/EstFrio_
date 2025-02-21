@@ -27,22 +27,21 @@ let package = Package(
                 .phone
             ],
             supportedInterfaceOrientations: [
-              
                 .landscapeRight,
                 .portraitUpsideDown(.when(deviceFamilies: [.pad]))
             ],
             capabilities: [
-                .microphone(purposeString: "EstFrio wants to change your microphone to complete challlenges")
+                .microphone(purposeString: "EstFrio wants to use your microphone to complete challlenges")
             ]
         )
     ],
     targets: [
         .executableTarget(
-          name: "AppModule",
-          path: ".",
-          resources: [
-            .process("Resources")
-          ]
+            name: "AppModule",
+            path: ".",
+            resources: [
+                .process("Resources")
+            ]
         )
-      ]
-    )
+    ]
+)

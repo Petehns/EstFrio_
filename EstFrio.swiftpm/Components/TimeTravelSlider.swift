@@ -11,7 +11,7 @@ struct TimeTravelSlider: View {
     @State private var dragAngle: Double = 0
     @State private var previousDragAngle: Double = 0
     @State private var isMovingForward: Bool = true
-    @ObservedObject var appState = ChallengeViewModel.shared
+    @EnvironmentObject var challengeViewModel: ChallengeViewModel
         @State private var selectedYear: Int = 2100
     @State private var isGoingToDestination: Bool = false
     @State private var currentYear: Int = 1950
@@ -66,7 +66,7 @@ struct TimeTravelSlider: View {
                               }
                               if !hiddenYears.contains(year) {
                                   Button(action: { /*isGoingToDestination = true */
-                                      appState.travelToYear(Int(selectedYear))}) {
+                                      challengeViewModel.travelToYear(Int(selectedYear))}) {
                                                  Text("Viajar no tempo")
                                                      .padding()
                                                      .background(Color.blue)

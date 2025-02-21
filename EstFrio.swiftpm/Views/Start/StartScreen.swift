@@ -10,7 +10,7 @@ import SwiftUI
 
 struct StartScreen: View {
     @State var showStartScreen: Bool = true
-    @ObservedObject var appState = ChallengeViewModel.shared
+    @EnvironmentObject var challengeViewModel: ChallengeViewModel
     var body: some View {
         
         if showStartScreen == true {
@@ -22,29 +22,29 @@ struct StartScreen: View {
                     .frame(width: UIScreen.main.bounds.width * 1.01, height: UIScreen.main.bounds.height * 1.01)
                     .ignoresSafeArea(.all)
                 VStack {
-                 
-                   Image("estFrio")
+                    
+                    Image("estFrio")
                         .resizable()
                         .scaledToFit()
                         .frame(width: UIScreen.main.bounds.width * 0.52 , height: UIScreen.main.bounds.height * 0.256)
                         .padding(.top, UIScreen.main.bounds.height * 0.055)
                     
                     Spacer()
-//                    Button(action: {
-//                        showStartScreen.toggle()
-//                    }, label: {
-//                        Text("Iniciar")
-//                            .font(.system(size: 40, weight: .bold))
-//                            .foregroundStyle(.white)
-//                    })
+                    //                    Button(action: {
+                    //                        showStartScreen.toggle()
+                    //                    }, label: {
+                    //                        Text("Iniciar")
+                    //                            .font(.system(size: 40, weight: .bold))
+                    //                            .foregroundStyle(.white)
+                    //                    })
                     Button("Iniciar") {
-                                   appState.currentScreen = .onboard
-                               }
+                        challengeViewModel.currentScreen = .onboard
+                    }
                     
                 }
                 .padding(UIScreen.main.bounds.height*0.2)
                 OunceAnimation()
-             
+                
                 MonkeyAnimation()
                 LeafAnimation()
             }

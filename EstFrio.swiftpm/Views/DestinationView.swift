@@ -9,7 +9,8 @@ import SwiftUI
 
 struct DestinationView: View {
     let year: Int
-    @StateObject var challengeViewModel = ChallengeViewModel()
+//    @StateObject var challengeViewModel = ChallengeViewModel()
+    @EnvironmentObject var challengeViewModel: ChallengeViewModel
     var body: some View {
         VStack {
          

@@ -5,8 +5,8 @@ struct MyApp: App {
     var body: some Scene {
         WindowGroup {
 //            OnBoardScreen(showStartScreen: .constant(false))
-            StartScreen()
-          
+//            StartScreen()
+          MainView()
 //            HoseChallenge()
         }
     }

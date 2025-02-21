@@ -36,6 +36,7 @@ struct HunterView: View {
             }
             .onAppear {
                 startGame(in: geometry.size)
+                challengeViewModel.completeHunterChallenge()
             }
         }
     }

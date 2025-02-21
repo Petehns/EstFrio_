@@ -17,7 +17,6 @@ struct Year1950Challenge: View {
                 .ignoresSafeArea()
             
             HunterView()
-            FireHoseView(motionManager: MotionManager())
         }
     }
 }

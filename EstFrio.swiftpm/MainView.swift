@@ -7,15 +7,15 @@
 import SwiftUI
 
 struct MainView: View {
-    @ObservedObject var appState = ChallengeViewModel.shared
+    @StateObject var challengeViewModel = ChallengeViewModel()
     @State var showStartScreen: Bool = true
     var body: some View {
         ZStack {
-            Image(appState.backgroundImage)
+            Image(challengeViewModel.backgroundImage)
                 .resizable()
                 .edgesIgnoringSafeArea(.all)
             
-            switch appState.currentScreen {
+            switch challengeViewModel.currentScreen {
             case .start:
                 StartScreen()
             case .onboard:
@@ -29,7 +29,7 @@ struct MainView: View {
             case .hunter:
                 HunterView()
             case .fireHose:
-                FireHoseView(motionManager: MotionManager())
+                FireHoseView()
             case .year2025:
                 Year2025Challenge()
             case .pollen:
@@ -38,5 +38,6 @@ struct MainView: View {
                 Year2100View()
             }
         }
+        .environmentObject(challengeViewModel)
     }
 }

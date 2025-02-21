@@ -7,8 +7,9 @@
 
 import SwiftUI
 
+@MainActor
 class ChallengeViewModel: ObservableObject {
-    static let shared = ChallengeViewModel() // Singleton
+//    static let shared = ChallengeViewModel() // Singleton
     
     @Published var currentScreen: AppScreen = .start
     @Published var completed1950Challenges = false
@@ -32,20 +33,20 @@ class ChallengeViewModel: ObservableObject {
     }
     
     func completeHunterChallenge() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 15) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
             self.currentScreen = .fireHose
         }
     }
     
     func completeFireHoseChallenge() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 20) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 15) {
             self.completed1950Challenges = true
             self.currentScreen = .timeTravel
         }
     }
     
     func completePollenChallenge() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 20) {
             self.completed2025Challenge = true
             self.currentScreen = .timeTravel
         }

@@ -3,7 +3,7 @@ import SceneKit
 import CoreMotion
 
 struct FireHoseView: UIViewRepresentable {
-    @ObservedObject var motionManager: MotionManager
+    @ObservedObject var motionManager: MotionManager = MotionManager()
     @EnvironmentObject var challengeViewModel: ChallengeViewModel
     func makeUIView(context: UIViewRepresentableContext<FireHoseView>) -> SCNView {
         let sceneView = SCNView()
@@ -20,6 +20,7 @@ struct FireHoseView: UIViewRepresentable {
         sceneView.autoenablesDefaultLighting = true
         sceneView.backgroundColor = .clear
         
+        challengeViewModel.completeFireHoseChallenge()
         return sceneView
     }
     

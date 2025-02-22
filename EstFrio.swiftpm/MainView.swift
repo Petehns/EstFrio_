@@ -11,9 +11,7 @@ struct MainView: View {
     @State var showStartScreen: Bool = true
     var body: some View {
         ZStack {
-            Image(challengeViewModel.backgroundImage)
-                .resizable()
-                .edgesIgnoringSafeArea(.all)
+           
             
             switch challengeViewModel.currentScreen {
             case .start:
@@ -29,13 +27,19 @@ struct MainView: View {
             case .hunter:
                 HunterView()
             case .fireHose:
-                FireHoseView()
+                FireHoseChallenge()
             case .year2025:
                 Year2025Challenge()
             case .pollen:
                 PollenView()
             case .year2100:
                 Year2100View()
+            case .between1950Challenges:
+                Between1950Challenges()
+            case .finished1950Challenges:
+                Finished1950Challenges()
+            case .finished2025Challenges:
+                Finished2025Challenges()
             }
         }
         .environmentObject(challengeViewModel)

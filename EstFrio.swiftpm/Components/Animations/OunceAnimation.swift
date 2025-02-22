@@ -17,10 +17,10 @@ struct OunceAnimation: View {
             Image(images[currentIndex])
                 .resizable()
                 .scaledToFit()
-                .frame(width: UIScreen.main.bounds.width * 0.23, height: UIScreen.main.bounds.height * 0.2)
+                .frame(width: UIScreen.main.bounds.width * 0.27, height: UIScreen.main.bounds.height * 0.24)
                 .opacity(opacity)
                 .animation(.linear(duration: 1.0), value: opacity)
-                .offset(x: 200, y: 190)
+                .offset(x: 190, y: 200)
         }
         .onAppear {
             Timer.scheduledTimer(withTimeInterval: 3.0, repeats: true) { _ in

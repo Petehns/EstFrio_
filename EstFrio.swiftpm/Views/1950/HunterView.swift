@@ -23,7 +23,11 @@ struct HunterView: View {
         GeometryReader { geometry in
             ZStack {
               
-                
+                Image("background1950")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: UIScreen.main.bounds.width * 1.01, height: UIScreen.main.bounds.height * 1.01)
+                    .ignoresSafeArea()
                 ForEach(enemies) { enemy in
                     Image(enemy.imageName)
                         .resizable()

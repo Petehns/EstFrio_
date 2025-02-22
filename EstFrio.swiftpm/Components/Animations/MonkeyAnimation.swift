@@ -23,7 +23,7 @@ struct MonkeyAnimation: View {
                     value: angle
                 )
         }
-        .offset(x: -380, y: -165)
+        .offset(x: -385, y: -170)
         .onAppear {
             startPendulumAnimation()
         }

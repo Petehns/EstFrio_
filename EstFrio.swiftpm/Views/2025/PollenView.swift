@@ -22,14 +22,14 @@ struct PollenView: View {
     let screenHeight = UIScreen.main.bounds.height
     
     var body: some View {
-        ZStack {
-            
-            if !isShowingFire{
-                ZStack {
-                    
+     
                     ZStack {
+                        Image("background2025")
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: UIScreen.main.bounds.width * 1.01, height: UIScreen.main.bounds.height * 1.01)
+                            .ignoresSafeArea()
                         
-                        // Animação do vento (quando o jogador sopra)
                         if isBlowing {
                             Image(wind[currentIndex])
                                 .resizable()
@@ -47,8 +47,7 @@ struct PollenView: View {
                                 .onAppear {
                                     animatePollen(pollen.id)
                                 }
-                        }
-                    }
+                      
                     .onAppear {
                         startAudioCapture()
                     }
@@ -65,10 +64,8 @@ struct PollenView: View {
                         }
                     }
                 }
-            }
-            else {
-                HunterView()
-            }
+            
+        
         }
         .onAppear{
             challengeViewModel.completePollenChallenge()

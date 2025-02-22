@@ -15,14 +15,16 @@ struct TimeTravelSlider: View {
         @State private var selectedYear: Int = 2100
     @State private var isGoingToDestination: Bool = false
     @State private var currentYear: Int = 1950
-    let years = [1950, 1975, 2025, 2075, 2100]
+    let years = [1950, 2025, 2050, 2060, 2075, 2090, 2100]
     let availableYears : [Int] = [1950, 2025, 2100]
-    let hiddenYears : [Int] = [1975, 2075]
+    let hiddenYears : [Int] = [2050, 2060, 2075, 2090]
     let images = [
         1950: "background1950",
-        1975: "backgroundInt2",
         2025: "background2025",
+        2050: "background2050",
+        2060: "background2060",
         2075: "background2075",
+        2090: "background2090",
         2100: "background2100"
     ]
     
@@ -45,11 +47,12 @@ struct TimeTravelSlider: View {
                       
                       ZStack {
                           
-                          Image("semicircle_mask")
+                          Image("semiCircle")
                               .resizable()
                               .scaledToFit()
                               .frame(width: width, height: radius * 2)
-                              .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
+                              .position(x: geometry.size.width / 2, y: geometry.size.height / 50)
+                              .offset(y: -60)
                           
                           
                           ForEach(years, id: \.self) { year in
@@ -83,7 +86,8 @@ struct TimeTravelSlider: View {
                           Image(isMovingForward ? "timeTravelShip2" : "timeTravelShip1")
                               .resizable()
                               .frame(width: UIScreen.main.bounds.width * 0.08, height: UIScreen.main.bounds.height * 0.035)
-                              .rotationEffect(.degrees(adjustedRocketRotation(for: selectedYear)))
+                              /*.rotationEffect(.degrees(adjustedRocketRotation(for: selectedYear)))
+                               */
                               .position(x: geometry.size.width / 2 + x, y: geometry.size.height / 2 + y)
                               .gesture(
                                   DragGesture()
@@ -118,13 +122,16 @@ struct TimeTravelSlider: View {
     func angleForYear(_ year: Int) -> Double {
         switch year {
         case 1950: return .pi
-        case 1975: return 5 * .pi / 4
         case 2025: return -.pi / 2
+        case 2050: return -.pi / 4
+        case 2060: return -.pi / 5
         case 2075: return -.pi / 6
+        case 2090: return -.pi / 12
         case 2100: return 0
         default: return .pi / 45
         }
     }
+
 
     
     func angleFromLocation(_ location: CGPoint, in size: CGSize) -> Double {
@@ -139,12 +146,12 @@ struct TimeTravelSlider: View {
     }
 
 
-    func adjustedRocketRotation(for year: Int) -> Double {
+    /*func adjustedRocketRotation(for year: Int) -> Double {
         let baseRotation = rocketRotationAngle(for: year)
         
         return isMovingForward ? baseRotation : -baseRotation
     }
-    
+    */
 
     func rocketRotationAngle(for year: Int) -> Double {
         switch year {

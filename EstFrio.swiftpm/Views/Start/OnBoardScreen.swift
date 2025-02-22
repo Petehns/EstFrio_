@@ -16,6 +16,11 @@ struct OnBoardScreen: View {
     var body: some View {
         if timeTravelisOn == false {
             ZStack {
+                Image("background2100")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: UIScreen.main.bounds.width * 1.01, height: UIScreen.main.bounds.height * 1.01)
+                    .ignoresSafeArea(.all)
                 VStack {
                     Spacer()
                     HStack {

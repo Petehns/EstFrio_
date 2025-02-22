@@ -34,26 +34,26 @@ class ChallengeViewModel: ObservableObject {
     
     func completeHunterChallenge() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
-            self.currentScreen = .fireHose
+            self.currentScreen = .between1950Challenges
         }
     }
     
     func completeFireHoseChallenge() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 15) {
             self.completed1950Challenges = true
-            self.currentScreen = .timeTravel
+            self.currentScreen = .finished1950Challenges
         }
     }
     
     func completePollenChallenge() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 20) {
             self.completed2025Challenge = true
-            self.currentScreen = .timeTravel
+            self.currentScreen = .finished2025Challenges
         }
     }
 }
 
 enum AppScreen {
-    case start, onboard, timeTravel, destination, year1950, hunter, fireHose, year2025, pollen, year2100
+    case start, onboard, timeTravel, destination, year1950, hunter, fireHose, year2025, pollen, year2100, between1950Challenges, finished1950Challenges, finished2025Challenges
 }
 

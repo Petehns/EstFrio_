@@ -35,7 +35,7 @@ struct OnBoardScreen: View {
                                 .scaledToFit()
                                 .frame(width: UIScreen.main.bounds.width * 0.7, height: UIScreen.main.bounds.height * 0.7)
                             
-                            Text("I’m Michelle, a biologist studying the Atlantic Forest. We tried everything, but the truth is: the damage is irreversible.\nUnless… we change the past.\nOur only hope is to travel back to 1950, when the forest was still thriving, and stop this disaster before it's too late.")
+                            Text("I’m Michelle, a biologist from the Atlantic Forest. The destruction is irreversible… unless we change the past.\nOur deadline is 1950. We must go back, prevent this disaster, and reshape the future!\nThe order is 1950 - 2025 - 2100")
                                 .font(.custom(.font, size: 22))
                                 .foregroundStyle(Color("greenEstFrio"))
                                 .frame(width: UIScreen.main.bounds.width * 0.5, height: UIScreen.main.bounds.height * 0.3)

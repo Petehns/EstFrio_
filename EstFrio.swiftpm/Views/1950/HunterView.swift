@@ -16,7 +16,7 @@ struct HunterView: View {
     
     @State private var enemies: [Enemy] = []
     @State private var timer: Timer?
-    let enemyImages = ["leaf1", "leaf2"] // Substitua pelos nomes das imagens no Assets
+    let enemyImages = ["logger1", "logger2"]
     let gameTime: TimeInterval = 2.0
     @EnvironmentObject var challengeViewModel: ChallengeViewModel
     var body: some View {
@@ -28,10 +28,21 @@ struct HunterView: View {
                     .scaledToFill()
                     .frame(width: UIScreen.main.bounds.width * 1.01, height: UIScreen.main.bounds.height * 1.01)
                     .ignoresSafeArea()
+                ZStack{
+                    Rectangle()
+                        .foregroundStyle(Color("yellowEstFrio"))
+                        .frame(width: UIScreen.main.bounds.width * 0.4, height: UIScreen.main.bounds.height * 0.1)
+                        .cornerRadius(20)
+                    Text("Tap the loggers to make them disappear")
+                        .font(.custom(.font, size: 25))
+                        .foregroundStyle(Color("redEstFrio"))
+                        .multilineTextAlignment(.center)
+                }
+                .padding(.bottom, UIScreen.main.bounds.height * 0.8)
                 ForEach(enemies) { enemy in
                     Image(enemy.imageName)
                         .resizable()
-                        .frame(width: 60, height: 60)
+                        .frame(width: UIScreen.main.bounds.width * 0.1, height: UIScreen.main.bounds.height * 0.19)
                         .position(enemy.position)
                         .onTapGesture {
                             removeEnemy(enemy)

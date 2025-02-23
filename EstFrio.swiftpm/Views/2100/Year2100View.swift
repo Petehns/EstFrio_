@@ -29,7 +29,7 @@ struct Year2100View: View {
                         .scaledToFit()
                         .frame(width: UIScreen.main.bounds.width * 0.7, height: UIScreen.main.bounds.height * 0.7)
                     
-                    Text("I’m Michelle, a biologist studying the Atlantic Forest. We tried everything, but the truth is: the damage is irreversible.\nUnless… we change the past.\nOur only hope is to travel back to 1950, when the forest was still thriving, and stop this disaster before it's too late.")
+                    Text("You did it! The Atlantic Forest has been reborn: clean air, thriving rivers, and restored wildlife. Paulista is sustainable once again.\nThank you for helping save this biome! In the real world, we still need heroes like you. Keep fighting for nature!\nAnd we now we know that to keep the enviroment alive we need to keep doing these actions from now on!")
                         .font(.custom(.font, size: 22))
                         .foregroundStyle(Color("greenEstFrio"))
                         .frame(width: UIScreen.main.bounds.width * 0.5, height: UIScreen.main.bounds.height * 0.3)

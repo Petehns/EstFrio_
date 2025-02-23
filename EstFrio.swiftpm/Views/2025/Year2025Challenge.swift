@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct Year2025Challenge: View {
+    @EnvironmentObject var challengeViewModel: ChallengeViewModel
     @State var start2025Challenge: Bool = false
     var body: some View {
         
@@ -31,7 +32,7 @@ struct Year2025Challenge: View {
                           .scaledToFit()
                           .frame(width: UIScreen.main.bounds.width * 0.7, height: UIScreen.main.bounds.height * 0.7)
                       
-                      Text("I’m Michelle, a biologist studying the Atlantic Forest. We tried everything, but the truth is: the damage is irreversible.\nUnless… we change the past.\nOur only hope is to travel back to 1950, when the forest was still thriving, and stop this disaster before it's too late.")
+                      Text("The landscape is a mix of destruction and hope. 80% of the Atlantic Forest has been lost, but reforestation efforts are emerging.\nHelp spread the pollen so new trees can grow!")
                           .font(.custom(.font, size: 22))
                           .foregroundStyle(Color("greenEstFrio"))
                           .frame(width: UIScreen.main.bounds.width * 0.5, height: UIScreen.main.bounds.height * 0.3)

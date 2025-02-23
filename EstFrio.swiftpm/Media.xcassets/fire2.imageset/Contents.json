@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "wind1.png",
+      "filename" : "fire2.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "fire2 1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "fire2 2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

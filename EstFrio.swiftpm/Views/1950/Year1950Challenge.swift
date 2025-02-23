@@ -30,7 +30,7 @@ struct Year1950Challenge: View {
                             .scaledToFit()
                             .frame(width: UIScreen.main.bounds.width * 0.7, height: UIScreen.main.bounds.height * 0.7)
                         
-                        Text("I’m Michelle, a biologist studying the Atlantic Forest. We tried everything, but the truth is: the damage is irreversible.\nUnless… we change the past.\nOur only hope is to travel back to 1950, when the forest was still thriving, and stop this disaster before it's too late.")
+                        Text("Giant trees, rivers full of life, and lush biodiversity. About 28% of the forest still remains, but deforestation is advancing.\nHunters and loggers threaten the forest. Your mission: stop them!")
                             .font(.custom(.font, size: 22))
                             .foregroundStyle(Color("greenEstFrio"))
                             .frame(width: UIScreen.main.bounds.width * 0.5, height: UIScreen.main.bounds.height * 0.3)

@@ -9,7 +9,7 @@ struct IntroView: View {
     @EnvironmentObject var challengeViewModel: ChallengeViewModel
     var body: some View {
         VStack {
-            Text("In 2100, the Atlantic Forest is nearly gone, devastated by decades of mass deforestation. By 2025, only 24% of its original coverage remained, marking a state of emergency.\nIn Paulista, Pernambuco, country of Brazil, the situation is even worse—scorching heat, dry rivers, and vanishing biodiversity have left the city unprotected. The air is polluted, and life in this biome has almost disappeared.\n")
+            Text("It is the year 2100, and the Atlantic Forest has almost completely disappeared due to massive deforestation. By 2025, only about 25% of its original coverage remained, declaring an environmental emergency.\nIn the state of Pernambuco (Brazil), the destruction is total: extreme temperatures, dry rivers, and lost biodiversity. Polluted air and species extinction have made life nearly impossible. The situation seems irreversible...\nBut what if there was one last hope?")
                 .foregroundStyle(.white)
                 .multilineTextAlignment(.center)
                 .font(.custom(.font, size: 24))

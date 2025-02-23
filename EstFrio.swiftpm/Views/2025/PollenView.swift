@@ -22,62 +22,68 @@ struct PollenView: View {
     let screenHeight = UIScreen.main.bounds.height
     
     var body: some View {
-     
-                    ZStack {
-                        Image("background2025")
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: UIScreen.main.bounds.width * 1.01, height: UIScreen.main.bounds.height * 1.01)
-                            .ignoresSafeArea()
-                        
-                        if isBlowing {
-                            Image(wind[currentIndex])
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: screenWidth, height: screenHeight)
-                                .opacity(opacity)
-                        }
-                        
-                        // Partículas de pólen voando continuamente
-                        ForEach(polens) { pollen in
-                            Circle()
-                                .fill(Color.yellow.opacity(pollen.opacity))
-                                .frame(width: 8, height: 8)
-                                .position(pollen.position)
-                                .onAppear {
-                                    animatePollen(pollen.id)
-                                }
-                      
-                    .onAppear {
-                        startAudioCapture()
-                    }
-                    .onDisappear {
-                        stopAudioCapture()
-                    }
-                    .onChange(of: isBlowing) { newValue in
-                        withAnimation(.easeInOut(duration: 0.3)) {
-                            opacity = newValue ? 1.0 : 0.0
-                        }
-                        
-                        if newValue {
-                            generatePollen()
-                        }
-                    }
-                }
+        ZStack {
+            Image("background2025")
+                .resizable()
+                .scaledToFill()
+                .frame(width: UIScreen.main.bounds.width * 1.01, height: UIScreen.main.bounds.height * 1.01)
+                .ignoresSafeArea()
             
-        
+            ZStack{
+                Rectangle()
+                    .foregroundStyle(Color("yellowEstFrio"))
+                    .frame(width: UIScreen.main.bounds.width * 0.4, height: UIScreen.main.bounds.height * 0.1)
+                    .cornerRadius(20)
+                Text("Blow on the mic to spread the pollen")
+                    .font(.custom(.font, size: 25))
+                    .foregroundStyle(Color("redEstFrio"))
+                    .multilineTextAlignment(.center)
+            }
+            .padding(.bottom, UIScreen.main.bounds.height * 0.8)
+            
+            if isBlowing {
+                Image(wind[currentIndex])
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: screenWidth, height: screenHeight)
+                    .opacity(opacity)
+            }
+            
+            ForEach(polens) { pollen in
+                Circle()
+                    .fill(Color.yellow.opacity(pollen.opacity))
+                    .frame(width: 8, height: 8)
+                    .position(pollen.position)
+                    .onAppear {
+                        animatePollen(pollen.id)
+                    }
+            }
         }
-        .onAppear{
+        .onAppear {
+            startAudioCapture() // Inicia a captura de áudio quando a view aparece
+        }
+        .onDisappear {
+            stopAudioCapture() // Para a captura de áudio quando a view desaparecer
+        }
+        .onChange(of: isBlowing) { newValue in
+            withAnimation(.easeInOut(duration: 0.3)) {
+                opacity = newValue ? 1.0 : 0.0
+            }
+            
+            if newValue {
+                generatePollen() // Gera o pólen quando o usuário começa a soprar
+            }
+        }
+        .onAppear {
             challengeViewModel.completePollenChallenge()
         }
     }
     
-    // Função para gerar pólens animados
     private func generatePollen() {
-        for _ in 0..<50 { // Aumentei o número de partículas para 20
-            let startX = CGFloat.random(in: 0...screenWidth) // Posições horizontais agora vão de 0 até a largura da tela
-            let startY = CGFloat.random(in: screenHeight * 0.7...screenHeight) // Posições verticais agora são mais distribuídas pela parte inferior
-            
+        for _ in 0..<20 {
+            let startX = CGFloat.random(in: 0...screenWidth)
+            let startY = CGFloat.random(in: screenHeight * 0.7...screenHeight) // Posição inicial do pólen
+
             let newPollen = PollenParticle(
                 id: UUID(),
                 position: CGPoint(x: startX, y: startY),
@@ -102,23 +108,20 @@ struct PollenView: View {
         }
     }
     
-    
-    // Função para animar cada pólen continuamente
     private func animatePollen(_ id: UUID) {
         guard let index = polens.firstIndex(where: { $0.id == id }) else { return }
         
         let randomX = CGFloat.random(in: -50...50)
-        let randomY = CGFloat.random(in: -100 ... -30)
-        
-        
+        let randomY = CGFloat.random(in: -100 ... -30) // Movimento aleatório para o pólen
         
         withAnimation(.linear(duration: 0.5)) {
             polens[index].position.x += randomX
             polens[index].position.y += randomY
         }
         
+        // Animar novamente após 0.5 segundos para simular um movimento contínuo
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            self.animatePollen(id) // Continua movendo até desaparecer
+            self.animatePollen(id)
         }
     }
     
@@ -126,6 +129,7 @@ struct PollenView: View {
     private func startAudioCapture() {
         let audioSession = AVAudioSession.sharedInstance()
         do {
+            // Configuração da sessão de áudio para captura
             try audioSession.setCategory(.playAndRecord, mode: .default)
             try audioSession.setActive(true)
             
@@ -136,15 +140,16 @@ struct PollenView: View {
                 AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
             ]
             
+            // Criação do gravador de áudio
             audioRecorder = try AVAudioRecorder(url: getAudioFileURL(), settings: settings)
             audioRecorder?.isMeteringEnabled = true
             audioRecorder?.prepareToRecord()
             audioRecorder?.record()
             
-            // Iniciar um timer para verificar os níveis de áudio periodicamente
+            // Iniciar um timer para monitorar os níveis de áudio a cada 0.1 segundos
             Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
                 Task { @MainActor in
-                    self.checkAudioLevels()
+                    self.checkAudioLevels() // Verifica se há sopro
                 }
             }
         } catch {
@@ -157,7 +162,6 @@ struct PollenView: View {
         audioRecorder = nil
     }
     
-    // Função para verificar o nível de áudio e ativar o "sopro"
     @MainActor
     private func checkAudioLevels() {
         guard let recorder = audioRecorder else {
@@ -167,9 +171,11 @@ struct PollenView: View {
         
         recorder.updateMeters()
         
-        // Agora o microfone está mais sensível (-20 dB ao invés de -10 dB)
+        // Verificar o nível de áudio (volume)
         let decibelLevel = recorder.averagePower(forChannel: 0)
-        isBlowing = decibelLevel > -20
+        
+        // Ativar a animação de "sopro" se o nível de áudio for maior que -10 dB
+        isBlowing = decibelLevel > -10
     }
     
     private func getAudioFileURL() -> URL {
@@ -178,7 +184,6 @@ struct PollenView: View {
     }
 }
 
-// Modelo para representar cada partícula de pólen
 struct PollenParticle: Identifiable {
     let id: UUID
     var position: CGPoint

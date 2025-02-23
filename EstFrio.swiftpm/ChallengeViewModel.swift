@@ -52,7 +52,7 @@ class ChallengeViewModel: ObservableObject {
     }
     
     func completeHunterChallenge() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 15) {
             self.currentScreen = .between1950Challenges
         }
     }
@@ -65,7 +65,7 @@ class ChallengeViewModel: ObservableObject {
     }
     
     func completePollenChallenge() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 20) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 15) {
             self.completed2025Challenge = true
             self.currentScreen = .finished2025Challenges
         }

@@ -31,7 +31,7 @@ let package = Package(
                 .portraitUpsideDown(.when(deviceFamilies: [.pad]))
             ],
             capabilities: [
-                .microphone(purposeString: "EstFrio wants to use your microphone to complete challlenges")
+                .microphone(purposeString: "EstFrio wants to use your microphone to complete challenges")
             ]
         )
     ],
@@ -41,7 +41,9 @@ let package = Package(
             path: ".",
             resources: [
                 .process("Resources")
+              
             ]
         )
+        
     ]
 )

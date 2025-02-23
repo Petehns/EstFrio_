@@ -1,4 +1,4 @@
-/*import SwiftUI
+import SwiftUI
 import SceneKit
 import CoreMotion
 
@@ -42,15 +42,18 @@ struct FireHoseView: UIViewRepresentable {
         // 🚨 Verifica se a água atingiu o fogo
         if let water = hose.childNode(withName: "water", recursively: true),
            let fire = uiView.scene?.rootNode.childNode(withName: "fire", recursively: true) {
-            if water.presentation.worldPosition.distance(to: fire.presentation.worldPosition) < 10 {
+            if water.presentation.worldPosition.distance(to: fire.presentation.worldPosition) < 50 {
                 fire.removeFromParentNode() // 🔥 Apaga o fogo
             }
         }
     }
 
-    /// 💦 Cria o sistema de partículas da água
     func createWaterParticle() -> SCNNode {
-        let water = SCNParticleSystem(named: "Water.sks", inDirectory: nil)!
+        // Use o Bundle.module para acessar o recurso dentro do pacote SwiftPM
+        guard let water = SCNParticleSystem(named: "Water.sks", inDirectory: Bundle.module.resourcePath) else {
+            print("Falha ao carregar a partícula de água.")
+            return SCNNode()
+        }
         let waterNode = SCNNode()
         waterNode.name = "water"
         waterNode.position = SCNVector3(0, 0, -5) // Sai da ponta da mangueira
@@ -58,13 +61,18 @@ struct FireHoseView: UIViewRepresentable {
         return waterNode
     }
 
+
     /// 🔥 Cria o sistema de partículas do fogo
     func createFireParticle() -> SCNNode {
-        let fire = SCNParticleSystem(named: "Fire.sks", inDirectory: nil)!
+        guard let fire = SCNParticleSystem(named: "Fire.sks", inDirectory: Bundle.main.resourcePath) else {
+            print("Falha ao carregar a partícula de fogo.")
+            return SCNNode()
+        }
         let fireNode = SCNNode()
         fireNode.name = "fire"
         fireNode.position = SCNVector3(0, -50, -100) // Ajuste conforme necessário
         fireNode.addParticleSystem(fire)
+        print("Partícula de fogo carregada com sucesso!")  // Depuração
         return fireNode
     }
 }
@@ -78,7 +86,10 @@ extension SCNVector3 {
         return sqrt(dx * dx + dy * dy + dz * dz)
     }
 }
-*/
+
+
+
+/*
 import SwiftUI
 import SceneKit
 import CoreMotion
@@ -113,3 +124,4 @@ struct FireHoseView: UIViewRepresentable {
         hose.eulerAngles = SCNVector3(0, Float(-motionManager.yaw) * sensitivity, 0)
     }
 }
+*/

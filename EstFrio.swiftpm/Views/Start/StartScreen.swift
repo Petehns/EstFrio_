@@ -37,9 +37,14 @@ struct StartScreen: View {
                     //                            .font(.system(size: 40, weight: .bold))
                     //                            .foregroundStyle(.white)
                     //                    })
-                    Button("Iniciar") {
-                        challengeViewModel.currentScreen = .onboard
-                    }
+                    Button(action: {
+                        challengeViewModel.currentScreen = .introView
+                    }, label: {Text("Start")
+                            .foregroundStyle(.white)
+                           
+                            .font(.custom(.font, size: 32))
+                    })
+                   
                     
                 }
                 .padding(UIScreen.main.bounds.height*0.2)

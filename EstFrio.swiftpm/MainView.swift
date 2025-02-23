@@ -20,8 +20,6 @@ struct MainView: View {
                 OnBoardScreen(showStartScreen: $showStartScreen)
             case .timeTravel:
                 TimeTravelSlider()
-            case .destination:
-                DestinationView(year: 2100)
             case .year1950:
                 Year1950Challenge()
             case .hunter:
@@ -40,6 +38,8 @@ struct MainView: View {
                 Finished1950Challenges()
             case .finished2025Challenges:
                 Finished2025Challenges()
+            case .introView:
+                IntroView()
             }
         }
         .environmentObject(challengeViewModel)

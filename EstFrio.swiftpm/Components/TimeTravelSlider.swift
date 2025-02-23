@@ -70,11 +70,15 @@ struct TimeTravelSlider: View {
                               if !hiddenYears.contains(year) {
                                   Button(action: { /*isGoingToDestination = true */
                                       challengeViewModel.travelToYear(Int(selectedYear))}) {
-                                                 Text("Viajar no tempo")
-                                                     .padding()
-                                                     .background(Color.blue)
-                                                     .foregroundColor(.white)
-                                                     .cornerRadius(10)
+                                          ZStack{
+                                              Rectangle()
+                                                  .foregroundStyle(Color("redEstFrio"))
+                                                  .frame(width: UIScreen.main.bounds.width * 0.13, height: UIScreen.main.bounds.height * 0.07)
+                                                  .cornerRadius(20)
+                                              Text("Travel to year")
+                                                  .font(.custom(.font, size: 22))
+                                                  .foregroundStyle(.white)
+                                          }
                                              }
                                          }
                           }
@@ -110,9 +114,27 @@ struct TimeTravelSlider: View {
                   Spacer()
               }
               .padding(.top, UIScreen.main.bounds.height * 0.9)
+              if let alertMessage = challengeViewModel.alertMessage {
+                  ZStack{
+                      Rectangle()
+                          .foregroundStyle(Color("redEstFrio"))
+                          .frame(width: UIScreen.main.bounds.width * 0.6, height: UIScreen.main.bounds.height * 0.1)
+                          .cornerRadius(20)
+                      Text(alertMessage)
+                          .font(.custom(.font, size: 25))
+                          .foregroundStyle(.white)
+                          .multilineTextAlignment(.center)
+                  }
+                  
+              }
           }
-      }else{
-          DestinationView(year: selectedYear)
+          .onChange(of: challengeViewModel.alertMessage) { newValue in
+              if newValue != nil {
+                  DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                      challengeViewModel.alertMessage = nil
+                  }
+              }
+          }
       }
            
         

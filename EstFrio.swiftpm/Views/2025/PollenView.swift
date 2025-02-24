@@ -13,7 +13,6 @@ struct PollenView: View {
     @State private var isBlowing = false
     @State private var opacity: Double = 0.0
     @State private var currentIndex = 0
-    @State private var wind = ["wind1", "wind2", "wind3", "wind4"]
     @State private var audioRecorder: AVAudioRecorder?
     @State private var isShowingFire = false
     @State private var polens: [PollenParticle] = []
@@ -42,11 +41,7 @@ struct PollenView: View {
             .padding(.bottom, UIScreen.main.bounds.height * 0.8)
             
             if isBlowing {
-                Image(wind[currentIndex])
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: screenWidth, height: screenHeight)
-                    .opacity(opacity)
+                
             }
             
             ForEach(polens) { pollen in
@@ -60,10 +55,10 @@ struct PollenView: View {
             }
         }
         .onAppear {
-            startAudioCapture() // Inicia a captura de áudio quando a view aparece
+            startAudioCapture()
         }
         .onDisappear {
-            stopAudioCapture() // Para a captura de áudio quando a view desaparecer
+            stopAudioCapture()
         }
         .onChange(of: isBlowing) { newValue in
             withAnimation(.easeInOut(duration: 0.3)) {
@@ -71,7 +66,7 @@ struct PollenView: View {
             }
             
             if newValue {
-                generatePollen() // Gera o pólen quando o usuário começa a soprar
+                generatePollen()
             }
         }
         .onAppear {
@@ -93,7 +88,7 @@ struct PollenView: View {
             polens.append(newPollen)
             animatePollen(newPollen.id)
             
-            // Remover após 5 segundos
+          
             DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
                 withAnimation(.easeOut(duration: 1)) {
                     if let index = polens.firstIndex(where: { $0.id == newPollen.id }) {
@@ -112,24 +107,24 @@ struct PollenView: View {
         guard let index = polens.firstIndex(where: { $0.id == id }) else { return }
         
         let randomX = CGFloat.random(in: -50...50)
-        let randomY = CGFloat.random(in: -100 ... -30) // Movimento aleatório para o pólen
+        let randomY = CGFloat.random(in: -100 ... -30)
         
         withAnimation(.linear(duration: 0.5)) {
             polens[index].position.x += randomX
             polens[index].position.y += randomY
         }
         
-        // Animar novamente após 0.5 segundos para simular um movimento contínuo
+      
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.animatePollen(id)
         }
     }
     
-    // Funções de captura de áudio
+    
     private func startAudioCapture() {
         let audioSession = AVAudioSession.sharedInstance()
         do {
-            // Configuração da sessão de áudio para captura
+          
             try audioSession.setCategory(.playAndRecord, mode: .default)
             try audioSession.setActive(true)
             
@@ -140,16 +135,16 @@ struct PollenView: View {
                 AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
             ]
             
-            // Criação do gravador de áudio
+           
             audioRecorder = try AVAudioRecorder(url: getAudioFileURL(), settings: settings)
             audioRecorder?.isMeteringEnabled = true
             audioRecorder?.prepareToRecord()
             audioRecorder?.record()
             
-            // Iniciar um timer para monitorar os níveis de áudio a cada 0.1 segundos
+           
             Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
                 Task { @MainActor in
-                    self.checkAudioLevels() // Verifica se há sopro
+                    self.checkAudioLevels()
                 }
             }
         } catch {
@@ -171,10 +166,10 @@ struct PollenView: View {
         
         recorder.updateMeters()
         
-        // Verificar o nível de áudio (volume)
+       
         let decibelLevel = recorder.averagePower(forChannel: 0)
         
-        // Ativar a animação de "sopro" se o nível de áudio for maior que -10 dB
+        
         isBlowing = decibelLevel > -10
     }
     

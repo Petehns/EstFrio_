@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "ship2.png",
+      "filename" : "nave2.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "nave2 1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "nave2 2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

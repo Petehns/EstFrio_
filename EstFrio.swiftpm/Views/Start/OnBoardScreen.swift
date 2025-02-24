@@ -11,7 +11,6 @@ import SwiftUI
 struct OnBoardScreen: View {
     @Binding var showStartScreen: Bool
     @State var timeTravelisOn: Bool = false
-//    @ObservedObject var appState = ChallengeViewModel.shared
     @EnvironmentObject var challengeViewModel: ChallengeViewModel
     var body: some View {
         if timeTravelisOn == false {
@@ -35,7 +34,7 @@ struct OnBoardScreen: View {
                                 .scaledToFit()
                                 .frame(width: UIScreen.main.bounds.width * 0.7, height: UIScreen.main.bounds.height * 0.7)
                             
-                            Text("I’m Michelle, a biologist from the Atlantic Forest. The destruction is irreversible… unless we change the past.\nOur deadline is 1950. We must go back, prevent this disaster, and reshape the future!\nThe order is 1950 - 2025 - 2100")
+                            Text("I’m Michelle, a biologist from the Atlantic Forest. The destruction is irreversible… unless we change the past.\nOur deadline is 1950. We must go back, prevent this disaster, and reshape the future!\nDrag the spaceship on the semicircle to travel through time\nThe order is 1950 - 2025 - 2100")
                                 .font(.custom(.font, size: 22))
                                 .foregroundStyle(Color("greenEstFrio"))
                                 .frame(width: UIScreen.main.bounds.width * 0.5, height: UIScreen.main.bounds.height * 0.3)

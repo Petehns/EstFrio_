@@ -57,10 +57,10 @@ struct HunterView: View {
     }
     
     func startGame(in size: CGSize) {
-        spawnEnemy(in: size) // Garante a primeira aparição
+        spawnEnemy(in: size)
         timer = Timer.scheduledTimer(withTimeInterval: gameTime, repeats: true) { _ in
             DispatchQueue.main.async {
-                spawnEnemy(in: size) // Agora rodando na Main Thread
+                spawnEnemy(in: size) 
             }
         }
     }

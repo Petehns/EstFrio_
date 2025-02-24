@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "semicircle.png",
+      "filename" : "roleta.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "semicircle 1.png",
+      "filename" : "roleta 1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "semicircle 2.png",
+      "filename" : "roleta 2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

@@ -40,6 +40,8 @@ struct MainView: View {
                 Finished2025Challenges()
             case .introView:
                 IntroView()
+            case .finishGame:
+                FinishGame()
             }
         }
         .environmentObject(challengeViewModel)

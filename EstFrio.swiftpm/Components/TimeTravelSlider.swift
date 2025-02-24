@@ -61,11 +61,17 @@ struct TimeTravelSlider: View {
                               let y = sin(angle) * (radius - 10)
                               
                               if !hiddenYears.contains(year) {
-                                  Text("\(year)")
-                                      .font(.caption)
-                                      .bold()
-                                      .foregroundColor(.white)
-                                      .position(x: geometry.size.width / 2 + x, y: geometry.size.height / 2 + y)
+                                  ZStack {
+                                      Rectangle()
+                                          .foregroundStyle(Color("yellowEstFrio"))
+                                          .frame(width: UIScreen.main.bounds.width * 0.08, height: UIScreen.main.bounds.height * 0.05)
+                                          .cornerRadius(20)
+                                      Text("\(year)")
+                                          .font(.custom(.font, size: 20))
+                                          .foregroundStyle(Color("redEstFrio"))
+                                      
+                                  }
+                                  .position(x: geometry.size.width / 2 + x, y: geometry.size.height / 2 + y)
                               }
                               if !hiddenYears.contains(year) {
                                   Button(action: { /*isGoingToDestination = true */
@@ -89,9 +95,8 @@ struct TimeTravelSlider: View {
                           
                           Image(isMovingForward ? "timeTravelShip2" : "timeTravelShip1")
                               .resizable()
-                              .frame(width: UIScreen.main.bounds.width * 0.08, height: UIScreen.main.bounds.height * 0.035)
-                              /*.rotationEffect(.degrees(adjustedRocketRotation(for: selectedYear)))
-                               */
+                              .frame(width: UIScreen.main.bounds.width * 0.14, height: UIScreen.main.bounds.height * 0.08)
+                           
                               .position(x: geometry.size.width / 2 + x, y: geometry.size.height / 2 + y)
                               .gesture(
                                   DragGesture()
@@ -166,14 +171,6 @@ struct TimeTravelSlider: View {
     func closestYear(to angle: Double) -> Int {
         return years.min(by: { abs(angleForYear($0) - angle) < abs(angleForYear($1) - angle) }) ?? 1950
     }
-
-
-    /*func adjustedRocketRotation(for year: Int) -> Double {
-        let baseRotation = rocketRotationAngle(for: year)
-        
-        return isMovingForward ? baseRotation : -baseRotation
-    }
-    */
 
     func rocketRotationAngle(for year: Int) -> Double {
         switch year {

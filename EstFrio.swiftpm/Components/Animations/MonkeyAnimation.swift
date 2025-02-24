@@ -30,7 +30,7 @@ struct MonkeyAnimation: View {
     }
 
     func startPendulumAnimation() {
-        angle = 15 // Alterna para o lado oposto
+        angle = 15 
     }
 }
 

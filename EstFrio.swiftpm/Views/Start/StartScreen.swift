@@ -30,19 +30,19 @@ struct StartScreen: View {
                         .padding(.top, UIScreen.main.bounds.height * 0.055)
                     
                     Spacer()
-                    //                    Button(action: {
-                    //                        showStartScreen.toggle()
-                    //                    }, label: {
-                    //                        Text("Iniciar")
-                    //                            .font(.system(size: 40, weight: .bold))
-                    //                            .foregroundStyle(.white)
-                    //                    })
+                    
                     Button(action: {
                         challengeViewModel.currentScreen = .introView
-                    }, label: {Text("Start")
-                            .foregroundStyle(.white)
-                           
-                            .font(.custom(.font, size: 32))
+                    }, label: {
+                        ZStack {
+                            Rectangle()
+                                .foregroundStyle(Color("yellowEstFrio"))
+                                .frame(width: UIScreen.main.bounds.width * 0.13, height: UIScreen.main.bounds.height * 0.07)
+                                .cornerRadius(20)
+                            Text("Start")
+                                .foregroundStyle(Color("redEstFrio"))
+                                .font(.custom(.font, size: 40))
+                        }
                     })
                    
                     

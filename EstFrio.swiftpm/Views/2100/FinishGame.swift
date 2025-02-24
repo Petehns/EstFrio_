@@ -1,30 +1,29 @@
 //
-//  IntroView.swift
+//  FinishGame.swift
 //  EstFrio
 //
-//  Created by Pedro Henrique Nunes da Silveira Bezerra on 22/02/25.
+//  Created by Pedro Henrique Nunes da Silveira Bezerra on 23/02/25.
 //
+
 import SwiftUI
-struct IntroView: View {
+struct FinishGame: View {
     @EnvironmentObject var challengeViewModel: ChallengeViewModel
     var body: some View {
         VStack {
-            Text("It is the year 2100, and the Atlantic Forest has almost completely disappeared due to massive deforestation. By 2025, only about 25% of its original coverage remained, declaring an environmental emergency.\nIn the state of Pernambuco (Brazil), the destruction is total: extreme temperatures, dry rivers, and lost biodiversity. Polluted air and species extinction have made life nearly impossible. The situation seems irreversible...\nBut what if there was one last hope?")
+            Text("The Atlantic Forest is one of the richest biomes in biodiversity in the world, home to thousands of plant and animal species that exist nowhere else. Additionally, it plays a key role in regulating the climate, producing water, and maintaining the air quality we breathe. Protecting this forest is not only an environmental issue but also a matter of survival for all of us.\nThank you for helping us save our planet and this very special biome. In the real world, we still need heroes like you. Keep fighting for nature!")
                 .foregroundStyle(.white)
                 .multilineTextAlignment(.center)
                 .font(.custom(.font, size: 28))
                 .frame(width: UIScreen.main.bounds.width * 0.7)
                 .padding()
-          
             Button(action: {
-                challengeViewModel.currentScreen = .onboard
-            }, label: {Text("Tap here to start your adventure")
+                challengeViewModel.currentScreen = .start
+            }, label: {Text("Tap here to finish your adventure")
                     .foregroundStyle(.white)
                    
                     .font(.custom(.font, size: 30))
             })
-     
-            
+                
             .padding(.top, UIScreen.main.bounds.height * 0.2)
             .padding()
         }

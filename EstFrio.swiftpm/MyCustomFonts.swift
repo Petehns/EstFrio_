@@ -8,10 +8,7 @@
 
 import SwiftUI
 
-/// A type for your custom fonts.
-///
-/// When you use this type, don't forget to add
-/// a case for each custom font you need as given in the example.
+
 enum MyCustomFonts: String, CaseIterable {
 
     case font = "Chewy.ttf"
